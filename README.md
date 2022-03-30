@@ -11,4 +11,4 @@ you can find postman collection under public folder
 1. [postman_environment](https://github.com/atikla/monotech/blob/master/public/postman_environment.json)
 
 ``note``
-> I deployed this app to [mono-tech](https://www.atikla.com/monotech)
+> I deployed this app to [mono-tech](https://monotech.herokuapp.com/api)
