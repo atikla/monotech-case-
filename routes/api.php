@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\BackOffice\PromotionCodeController;
+use App\Http\Controllers\User\Auth\AuthLoginController;
+use App\Http\Controllers\User\Auth\AuthRegisterController;
+use App\Http\Controllers\User\Promotion\AssignPromotionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +18,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/', fn() => response()->json('welcome'))->name('home');
+
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::get('/user/', fn(Request $request) => $request->user())->name('get-user');
+
+    Route::post('/assign-promotion/', AssignPromotionController::class)
+        ->middleware('auth:sanctum')
+        ->name('assign-promotion');
 });
+
+
+Route::prefix('/auth/')->name('auth.')->group(function () {
+
+    Route::post('/login/', AuthLoginController::class)->name('login');
+
+    Route::post('/register/', AuthRegisterController::class)->name('register');
+});
+
+Route::prefix('/backoffice/')
+    ->middleware('backoffice.auth:' . env('BACK_OFFICE_AUTH_TOKEN', 'default_token'))
+    ->name('backoffice.')
+    ->group(function () {
+
+        Route::apiResource('promotion-codes', PromotionCodeController::class)
+            ->except(['update', 'destroy'])
+            ->names('promotion_code');
+    });

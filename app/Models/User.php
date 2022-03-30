@@ -2,15 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +22,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'user_name',
+        'first_name',
+        'last_name',
         'email',
-        'password',
+        'password'
     ];
 
     /**
@@ -38,7 +44,32 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    protected $casts = [];
+
+
+    /**
+     * Interact with the promotion's code.
+     *
+     * @return Attribute
+     */
+    protected function password(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => Hash::make($value)
+        );
+    }
+
+    /**
+     * @return hasOne
+     */
+    public function wallet(): hasOne
+    {
+        return $this->hasOne(Wallet::class);
+    }
+
+    public function promotions(): BelongsToMany
+    {
+        return $this->belongsToMany(Promotion::class)
+            ->using(PromotionUser::class);
+    }
 }
