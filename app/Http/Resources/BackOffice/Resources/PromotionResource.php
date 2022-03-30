@@ -36,7 +36,7 @@ class PromotionResource extends BaseResource
             'remained_quota' => $this->remained_quota,
             'start_date' => $this->start_date->format(Constants::FORMATTED_DATE),
             'end_date' => $this->end_date->format(Constants::FORMATTED_DATE),
-            'users' => UserRecorce::collection($this->users)
+            'users' => UserResource::collection($this->users)
         ];
     }
 }

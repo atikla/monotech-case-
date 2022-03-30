@@ -3,6 +3,7 @@
 use App\Http\Controllers\BackOffice\PromotionCodeController;
 use App\Http\Controllers\User\Auth\AuthLoginController;
 use App\Http\Controllers\User\Auth\AuthRegisterController;
+use App\Http\Controllers\User\Promotion\AssignPromotionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,8 +22,13 @@ Route::middleware('auth:sanctum')->get('/user/', function (Request $request) {
     return [$request->user(), $request->user()->wallets()];
 });
 
+Route::post('/assign-promotion', AssignPromotionController::class)
+    ->middleware('auth:sanctum');
+
 Route::prefix('/auth/')->name('auth.')->group(function () {
+
     Route::post('/login/', AuthLoginController::class)->name('login');
+
     Route::post('/register/', AuthRegisterController::class)->name('login');
 });
 
@@ -35,7 +41,4 @@ Route::prefix('/backoffice/')
             ->except(['update', 'destroy'])
             ->names('promotion_code');
 
-        //Route::get('/promotion-codes/', [PromotionCodeController::class, 'index']);
-        //Route::get('/promotion-codes/{id}', [PromotionCodeController::class, 'show']);
-        //Route::post('/promotion-codes/', [PromotionCodeController::class, 'store']);
     });

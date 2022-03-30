@@ -6,7 +6,7 @@ use App\Exceptions\Common\LoginException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Auth\AuthLoginRequest;
 use App\Http\Resources\User\Auth\LoginResource;
-use App\Services\User\AuthService;
+use App\Services\User\Auth\AuthService;
 
 class AuthLoginController extends Controller
 {

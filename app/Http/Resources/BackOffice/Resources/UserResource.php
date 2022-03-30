@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources\BackOffice\Resources;
 
-use App\Contracts\Constants;
 use App\Http\Resources\BaseResource;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
@@ -10,10 +9,13 @@ use JsonSerializable;
 
 /**
  * @property $id
- * @property $balance
- * @property $updated_at
+ * @property $user_name
+ * @property $first_name
+ * @property $last_name
+ * @property $email
+ * @property $wallets
  */
-class WalletRecorce extends BaseResource
+class UserResource extends BaseResource
 {
     /**
      * Transform the resource into an array.
@@ -25,8 +27,11 @@ class WalletRecorce extends BaseResource
     {
         return [
             'id' => $this->id,
-            'balance' => $this->balance,
-            'updated_at' => $this->updated_at->format(Constants::FORMATTED_DATE),
+            'user_name' => $this->user_name,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'email' => $this->email,
+            'wallet' => WalletResource::collection($this->wallets)
         ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\User;
+namespace App\Services\User\Auth;
 
 use App\Contracts\Repositories\UserRepositoryContract;
 use App\Exceptions\Common\LoginException;

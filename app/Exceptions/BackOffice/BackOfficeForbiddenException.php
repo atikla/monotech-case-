@@ -3,7 +3,6 @@
 namespace App\Exceptions\BackOffice;
 
 
-use App\Exceptions\BackOffice\BaseBackOfficeException;
 use App\Support\Str\StrSupport as Str;
 use Symfony\Component\HttpFoundation\Response;
 

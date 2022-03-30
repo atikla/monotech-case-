@@ -63,7 +63,7 @@ class StoreRequest extends FormRequest
             'amount' => ['required', 'integer', 'min:1'],
             'quota' => ['required', 'integer', 'min:1'],
             'remained_quota' => ['required', 'same:quota'],
-            'code' => ['required', 'unique:promotions,code', 'size:12'],
+            'code' => ['required', 'unique:promotions,code', 'size:' . Promotion::CODE_LENGTH],
         ];
     }
 }
