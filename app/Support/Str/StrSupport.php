@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 
 class StrSupport
 {
-
     /**
      * @param string $value
      * @param string $separator
