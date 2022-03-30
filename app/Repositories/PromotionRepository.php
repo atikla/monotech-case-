@@ -25,6 +25,7 @@ class PromotionRepository extends BaseRepository implements PromotionRepositoryC
         return $this->model
             ->whereCode($code)
             ->where('remained_quota', '!=' , Constants::ZERO_VALUE)
+            ->whereRaw('(NOW() between start_date and end_date)')
             ->first();
     }
 }

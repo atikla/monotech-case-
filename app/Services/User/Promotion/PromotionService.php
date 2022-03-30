@@ -10,8 +10,7 @@ class PromotionService
 
     public static function assignPromotionToUser(User $user, ?Promotion $promotion): bool
     {
-        if (
-            empty($promotion)
+        if (empty($promotion)
             || $user->promotions()->where('promotions.id', $promotion->id)->first()
         ) {
             return false;

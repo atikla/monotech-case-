@@ -26,7 +26,7 @@ class AssignPromotionController extends Controller
      * @return AssignPromotionResource
      * @throws PromotionNotSuitableForAssignmentException
      */
-    #[NoReturn] public function __invoke(AssignPromotionRequest $request): AssignPromotionResource
+    public function __invoke(AssignPromotionRequest $request): AssignPromotionResource
     {
         return PromotionService::assignPromotionToUser(
             user: $request->user(),
