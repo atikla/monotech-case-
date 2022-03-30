@@ -11,6 +11,8 @@ class Wallet extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public const TOKEN_LENGTH = 50;
+
     /**
      * The attributes that are mass assignable.
      *

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BackOffice\PromotionCodeController;
 use App\Http\Controllers\User\Auth\AuthLoginController;
+use App\Http\Controllers\User\Auth\AuthRegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,11 +18,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user/', function (Request $request) {
-    return $request->user();
+    return [$request->user(), $request->user()->wallets()];
 });
 
 Route::prefix('/auth/')->name('auth.')->group(function () {
     Route::post('/login/', AuthLoginController::class)->name('login');
+    Route::post('/register/', AuthRegisterController::class)->name('login');
 });
 
 Route::prefix('/backoffice/')

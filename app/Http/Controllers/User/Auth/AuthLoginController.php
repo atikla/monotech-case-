@@ -10,7 +10,6 @@ use App\Services\User\AuthService;
 
 class AuthLoginController extends Controller
 {
-
     /**
      * @throws LoginException
      */

@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('wallets', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->references('id')->on('users');
-            $table->double('balance')->unsigned();
+            $table->double('balance')->unsigned()->default(0);
             $table->string('token', 50)->unique()->index();
             $table->timestamps();
             $table->softDeletes();
