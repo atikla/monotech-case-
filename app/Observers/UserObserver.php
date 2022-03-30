@@ -14,6 +14,6 @@ class UserObserver
      */
     public function created(User $user)
     {
-        $user->wallets()->create();
+        $user->wallet()->create();
     }
 }

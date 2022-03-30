@@ -18,18 +18,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user/', function (Request $request) {
-    return [$request->user(), $request->user()->wallets()];
+Route::get('/', fn() => response()->json('welcome'))->name('home');
+
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::get('/user/', fn(Request $request) => $request->user())->name('get-user');
+
+    Route::post('/assign-promotion/', AssignPromotionController::class)
+        ->middleware('auth:sanctum')
+        ->name('assign-promotion');
 });
 
-Route::post('/assign-promotion', AssignPromotionController::class)
-    ->middleware('auth:sanctum');
 
 Route::prefix('/auth/')->name('auth.')->group(function () {
 
     Route::post('/login/', AuthLoginController::class)->name('login');
 
-    Route::post('/register/', AuthRegisterController::class)->name('login');
+    Route::post('/register/', AuthRegisterController::class)->name('register');
 });
 
 Route::prefix('/backoffice/')
@@ -40,5 +45,4 @@ Route::prefix('/backoffice/')
         Route::apiResource('promotion-codes', PromotionCodeController::class)
             ->except(['update', 'destroy'])
             ->names('promotion_code');
-
     });
