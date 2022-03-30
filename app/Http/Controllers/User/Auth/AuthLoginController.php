@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers\User\Auth;
 
+use App\Exceptions\Common\LoginException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Auth\AuthLoginRequest;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\User\Auth\LoginResource;
+use App\Services\User\AuthService;
 
 class AuthLoginController extends Controller
 {
 
-    public function __invoke(AuthLoginRequest $request): JsonResponse
+    /**
+     * @throws LoginException
+     */
+    public function __invoke(AuthLoginRequest $request): LoginResource
     {
-        if (!Auth::attempt($request->validated())) {
-            dd('omg');
-        }
-
-        return response()->json([
-            'token' => auth()->user()->createToken('API Token')->plainTextToken
-        ]);
+        return AuthService::login($request->validated());
     }
 }
