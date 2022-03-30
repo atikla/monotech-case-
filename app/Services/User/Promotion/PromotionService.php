@@ -18,6 +18,8 @@ class PromotionService
         }
 
         $user->promotions()->attach($promotion);
+        $user->wallet()->update(['balance' => $user->wallet->balance + $promotion->amount]);
+
         --$promotion->remained_quota;
         $promotion->save();
 

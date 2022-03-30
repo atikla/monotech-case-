@@ -13,7 +13,7 @@ use JsonSerializable;
  * @property $first_name
  * @property $last_name
  * @property $email
- * @property $wallets
+ * @property $wallet
  */
 class UserResource extends BaseResource
 {
@@ -31,7 +31,7 @@ class UserResource extends BaseResource
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
-            'wallet' => WalletResource::collection($this->wallets)
+            'wallet' => new WalletResource($this->wallet)
         ];
     }
 }
