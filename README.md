@@ -1,7 +1,7 @@
 #### Install
 
 1. clone repo
-2. run composer install ( you must have php8 in your local, or you can run it over sail)
+2. run composer install ( you must have php8 in your local, or you can run it over docker)
 3. run this commands
    1. php artisan migrate
    2. php artisan db:seed
