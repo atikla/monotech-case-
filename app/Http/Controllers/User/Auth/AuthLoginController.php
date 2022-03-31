@@ -11,6 +11,8 @@ use App\Services\User\Auth\AuthService;
 class AuthLoginController extends Controller
 {
     /**
+     * @param AuthLoginRequest $request
+     * @return LoginResource
      * @throws LoginException
      */
     public function __invoke(AuthLoginRequest $request): LoginResource

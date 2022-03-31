@@ -41,7 +41,7 @@ class AssignPromotionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => ['required', 'exists:promotions', 'size:' . Promotion::CODE_LENGTH],
+            'code' => ['required', 'size:' . Promotion::CODE_LENGTH, 'exists:promotions'],
         ];
     }
 }

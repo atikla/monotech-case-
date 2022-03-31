@@ -7,7 +7,11 @@ use App\Models\User;
 
 class PromotionService
 {
-
+    /**
+     * @param User $user
+     * @param Promotion|null $promotion
+     * @return bool
+     */
     public static function assignPromotionToUser(User $user, ?Promotion $promotion): bool
     {
         if (empty($promotion)
